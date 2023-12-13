@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-import Circuit
+import circuit
 
-abscisse_g = Circuit.liste_gauche_triee[0]
-ordonnee_g = Circuit.liste_gauche_triee[1]
-abscisse_d = Circuit.liste_droite_triee[0]
-ordonnee_d = Circuit.liste_droite_triee[1]
+abscisse_g = circuit.liste_gauche_triee[0]
+ordonnee_g = circuit.liste_gauche_triee[1]
+abscisse_d = circuit.liste_droite_triee[0]
+ordonnee_d = circuit.liste_droite_triee[1]
 
 checkpoint_gauche_abscisse = abscisse_g[0: len(abscisse_g): 80]
 checkpoint_gauche_ordonnee = ordonnee_g[0: len(ordonnee_g): 80]
