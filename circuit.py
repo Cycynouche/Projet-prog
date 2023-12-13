@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 rayon_circuit = 0.5
 eps = 0.01
