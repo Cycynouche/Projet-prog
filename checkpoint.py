@@ -14,7 +14,7 @@ def distance(t0, t1):
 D=distance(-1.5,1.5)/N
 
 def calcul_checkpoints(f_prime, td, ta, n):
-    L=[td]
+    L=[]
     t_prec=td
     for i in range(n-1):
         g=lambda t: distance(t_prec, t)-D
