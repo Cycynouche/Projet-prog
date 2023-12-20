@@ -7,13 +7,6 @@ import numpy as np
 N=10
 
 
-abscisse_g = circuit.liste_gauche_triee[0]
-ordonnee_g = circuit.liste_gauche_triee[1]
-abscisse_d = circuit.liste_droite_triee[0]
-ordonnee_d = circuit.liste_droite_triee[1]
-
-
-
 def distance(t0, t1):
    return integrate.quad(lambda t: np.linalg.norm(circuit.f_prime(t)), t0, t1)[0]
    
@@ -24,10 +17,16 @@ def calcul_checkpoints(f_prime, td, ta, n):
     L=[td]
     t_prec=td
     for i in range(n-1):
-        g=lambda t: distance(td, t)-D
-        xo_guess= t_prec + D
-        if xo_guess> ta:
-            xo_guess=(ta + t_prec)/2
-        t_prec= root_scalar(g, bracket=(t_prec,ta),fprime=lambda t:np.linalg.norm(f_prime(t)), x0=xo_guess).root
+        g=lambda t: distance(t_prec, t)-D
+        x0_guess= t_prec + D
+        if x0_guess> ta:
+            x0_guess=(ta + t_prec)/2
+        t_prec=root_scalar(g, bracket=(t_prec,ta),fprime=lambda t:np.linalg.norm(f_prime(t)), x0=x0_guess).root
+        print(t_prec)
         L.append(t_prec)
     return L
+
+#abcisse checkpoints
+t=calcul_checkpoints(circuit.f_prime, -1.5, 1.5, N)
+#ordonnées checkpoints
+(x,y)=circuit.f(np.asarray(t))
