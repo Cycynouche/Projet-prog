@@ -23,11 +23,11 @@ D=distance(-1.5,1.5)/N
 def calcul_checkpoints(f_prime, td, ta, n):
     L=[td]
     t_prec=td
-    g=lambda t: distance(td, t)-D
     for i in range(n-1):
+        g=lambda t: distance(td, t)-D
         xo_guess= t_prec + D
         if xo_guess> ta:
             xo_guess=(ta + t_prec)/2
-        t_prec= root_scalar(g, bracket=(t_prec,ta),fprime=lambda t:np.linalg.norm(f_prime(t)), xo=xo_guess)
+        t_prec= root_scalar(g, bracket=(t_prec,ta),fprime=lambda t:np.linalg.norm(f_prime(t)), x0=xo_guess).root
         L.append(t_prec)
     return L
