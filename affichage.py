@@ -11,6 +11,5 @@ plt.plot(circuit.liste_droite_triee[0], circuit.liste_droite_triee[1])
 
 
 #checkpoints
-plt.plot(checkpoint.checkpoint_gauche_abscisse, checkpoint.checkpoint_gauche_ordonnee, 'b+' )
-plt.plot(checkpoint.checkpoint_droite_abscisse, checkpoint.checkpoint_droite_ordonnee, 'r+' )
+plt.scatter(checkpoint.x, checkpoint.y)
 plt.show()
