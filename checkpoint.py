@@ -22,7 +22,6 @@ def calcul_checkpoints(f_prime, td, ta, n):
         if x0_guess> ta:
             x0_guess=(ta + t_prec)/2
         t_prec=root_scalar(g, bracket=(t_prec,ta),fprime=lambda t:np.linalg.norm(f_prime(t)), x0=x0_guess).root
-        print(t_prec)
         L.append(t_prec)
     L.append(ta)
     return L
