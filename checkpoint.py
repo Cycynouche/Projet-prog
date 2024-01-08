@@ -30,3 +30,19 @@ def calcul_checkpoints(f_prime, td, ta, n):
 t=calcul_checkpoints(circuit.f_prime, -1.5, 1.5, N)
 #ordonnées checkpoints
 (x,y)=circuit.f(np.asarray(t))
+
+
+#Faire points bordures
+params = np.array(t)
+speed = circuit.f_prime(params)
+orth_x = speed[1]
+orth_y = -speed[0]
+orth = np.stack([orth_x, orth_y])
+
+
+#Normaliser les vecteurs
+orth_normalise = orth / np.sqrt(orth_x**2 + orth_y**2)
+
+
+liste_points_gauche = np.stack((x - circuit.rayon_circuit*orth_normalise[0],  y - circuit.rayon_circuit*orth_normalise[1]))
+liste_points_droite = np.stack((x + circuit.rayon_circuit*orth_normalise[0], y + circuit.rayon_circuit*orth_normalise[1]))
