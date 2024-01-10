@@ -14,16 +14,5 @@ plt.plot(circuit.liste_droite_triee[0], circuit.liste_droite_triee[1])
 plt.scatter(checkpoint.x, checkpoint.y)
 plt.scatter(checkpoint.liste_points_droite[0], checkpoint.liste_points_droite[1])
 plt.scatter(checkpoint.liste_points_gauche[0], checkpoint.liste_points_gauche[1])
-
-
-#relier les checkpoints 
-
-def relier(L1, L2, L3, L4):
-    for i in range(len(L1)):
-        plt.plot((L1[i], L2[i]), (L3[i], L4[i]))
-        
-print(relier(checkpoint.liste_points_droite[0],checkpoint.liste_points_gauche[0],checkpoint.liste_points_droite[1],checkpoint.liste_points_gauche[1]))
-
-
-
+plt.plot((checkpoint.liste_points_gauche[0],checkpoint.liste_points_droite[0]),(checkpoint.liste_points_gauche[1],checkpoint.liste_points_droite[1]))
 plt.show()
