@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt 
 import circuit 
 import checkpoint
+import trajectoire
 
 #circuit
 plt.plot(circuit.pos[0], circuit.pos[1], 'b--')
