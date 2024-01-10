@@ -4,7 +4,7 @@ import scipy.integrate as integrate
 import numpy as np
 
 #Nombre de checkpoints
-N=10
+N=50
 
 
 def distance(t0, t1):
@@ -31,18 +31,30 @@ t=calcul_checkpoints(circuit.f_prime, -1.5, 1.5, N)
 #ordonnées checkpoints
 (x,y)=circuit.f(np.asarray(t))
 
-
-#Faire points bordures
+#checkpoint gauche et droite
 params = np.array(t)
 speed = circuit.f_prime(params)
 orth_x = speed[1]
 orth_y = -speed[0]
 orth = np.stack([orth_x, orth_y])
 
-
-#Normaliser les vecteurs
 orth_normalise = orth / np.sqrt(orth_x**2 + orth_y**2)
 
+liste_points_gauche = np.stack((x- circuit.rayon_circuit*orth_normalise[0], y - circuit.rayon_circuit*orth_normalise[1]))
+liste_points_droite = np.stack((x+ circuit.rayon_circuit*orth_normalise[0], y + circuit.rayon_circuit*orth_normalise[1]))
 
-liste_points_gauche = np.stack((x - circuit.rayon_circuit*orth_normalise[0],  y - circuit.rayon_circuit*orth_normalise[1]))
-liste_points_droite = np.stack((x + circuit.rayon_circuit*orth_normalise[0], y + circuit.rayon_circuit*orth_normalise[1]))
+
+#garder que les points sur la courbes et placer checkpoints sur points valides
+def points_gardes_ckpt(L, liste_points):
+    liste = []
+    for i in range(len(L[0])):
+        point = liste_points[:,i]
+        if abs(circuit.distance_min(L,point)-circuit.rayon_circuit)<circuit.eps:
+            liste.append(point)
+        else:
+            liste.append(liste[-1])
+    return np.asarray(liste).T
+
+L=np.asarray((x,y))
+points_gauche_valides=points_gardes_ckpt(L, liste_points_gauche)
+points_droite_valides=points_gardes_ckpt(L, liste_points_droite)
