@@ -65,6 +65,7 @@ def somme(t):
     return s
 
 results= scipy.optimize.least_squares(somme, 1/2, '2-point', (0,1))
+t = result.x
 #renvoie un result: object contenant t + valeur atteinte en t et autre parties de l'optimisation
 
 #point de depart t=1/2, attention t entre 0 et 1
