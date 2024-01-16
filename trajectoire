@@ -8,25 +8,31 @@ D=checkpoint.points_droite_valides
 G=checkpoint.points_gauche_valides
 
 P0 = (0.5*(G[0][0]+D[0][0]), 0.5*(G[1][0]+D[1][0]))
-G.T[0]= D.T[0]=(G.T[0]+D.T[0])/2
 
+
+G = np.transpose(G)
+D = np.transpose(D)
+
+G[0] = (G[0]+D[0])/2
+D[0] = G[0]
 
 #fonction qui prend un vecteur(t) et renvoie un vecteur (f)
 
 
 def calcul_f(t):
-    P= D+t*(G-D)
-    result=np.linalg.norm(P.T[1:]-P.T[:-1], axis=1)
+    #P= D+np.stack([t,t]).T*(G-D)
+    P= D+np.reshape(t,(len(t),1))*(G-D)
+    result=np.linalg.norm(P[1:]-P[:-1], axis=1)
     return result
 
 
 
-results= scipy.optimize.least_squares(calcul_f, np.repeat(1/2,len(G[1])), bounds=(0,1))
+results= scipy.optimize.least_squares(calcul_f, np.repeat(1/2,len(G)), bounds=(0,1))
 t=results.x
-print(results)
+print(t)
 #renvoie un result: object contenant t + valeur atteinte en t et autre parties de l'optimisation
 
 #point de depart t=1/2, attention t entre 0 et 1 (argument bounds)
 
 
-P=D+t*(G-D)
+P= D+np.reshape(t,(len(t),1))*(G-D)
