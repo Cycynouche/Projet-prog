@@ -4,7 +4,7 @@ import scipy.integrate as integrate
 import numpy as np
 
 #Nombre de checkpoints
-N=50
+N=200
 
 
 def distance(t0, t1):
