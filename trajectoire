@@ -8,65 +8,25 @@ D=checkpoint.points_droite_valides
 G=checkpoint.points_gauche_valides
 
 P0 = (0.5*(G[0][0]+D[0][0]), 0.5*(G[1][0]+D[1][0]))
-
-#on doit faire fonction qui prend un vecteur(t) et renvoie un vecteur (fi)
-def p_i(i,ti):
-    delta_i = (G[0][i],G[1][i]) - (D[0][i],D[1][i])
-    return(D[0][i],D[1][i]) + ti*delta_i
-  
-def f_i(i,t):
-    return(np.linalg.norm(p_i(i,t)-p_i(i-1,t), axis=1))
+G.T[0]= D.T[0]=(G.T[0]+D.T[0])/2
 
 
-def somme(t):
-    s=0
-    for i in range(checkpoint.N):
-        s += f_i(i, t)
-    return s
+#fonction qui prend un vecteur(t) et renvoie un vecteur (f)
 
-results= scipy.optimize.least_squares(somme, 1/2, '2-point', (0,1))
+
+def calcul_f(t):
+    P= D+t*(G-D)
+    result=np.linalg.norm(P.T[1:]-P.T[:-1], axis=1)
+    return result
+
+
+
+results= scipy.optimize.least_squares(calcul_f, np.repeat(1/2,len(G[1])), bounds=(0,1))
+t=results.x
+print(results)
 #renvoie un result: object contenant t + valeur atteinte en t et autre parties de l'optimisation
 
-#point de depart t=1/2, attention t entre 0 et 1
-#autre argument 'bounds' regarder dans doc
+#point de depart t=1/2, attention t entre 0 et 1 (argument bounds)
 
 
-#######CYRIELLE#######
-import scipy.optimize
-import checkpoint
-import circuit
-import numpy as np
-
-
-D=checkpoint.points_droite_valides
-G=checkpoint.points_gauche_valides
-
-P0 = (0.5*(G[0][0]+D[0][0]), 0.5*(G[1][0]+D[1][0]))
-
-def soustraction(tuple1, tuple2):
-    tuple3 = (0,0)
-    for i in range(len(tuple1)):
-        tuple3[i]= tuple2[i]-tuple1[i]
-    return tuple3
-    
-#on doit faire fonction qui prend un vecteur(t) et renvoie un vecteur (fi)
-def p_i(i,ti):
-    delta_i = soustraction((G[0][i],G[1][i]), (D[0][i],D[1][i]))
-    return(D[0][i],D[1][i]) + ti*delta_i
-  
-def f_i(i,t):
-    return(np.linalg.norm(p_i(i,t)-p_i(i-1,t), axis=1))
-
-
-def somme(t):
-    s=0
-    for i in range(checkpoint.N):
-        s += f_i(i, t)
-    return s
-
-results= scipy.optimize.least_squares(somme, 1/2, '2-point', (0,1))
-t = results.x
-#renvoie un result: object contenant t + valeur atteinte en t et autre parties de l'optimisation
-
-#point de depart t=1/2, attention t entre 0 et 1
-#autre argument 'bounds' regarder dans doc
+P=D+t*(G-D)
