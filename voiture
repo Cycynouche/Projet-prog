@@ -13,3 +13,41 @@ image_position = [-1.5, -1.8]
 # Afficher l'image sur le graphique
 imagebox = OffsetImage(car_image, zoom=0.1)
 ab = AnnotationBbox(imagebox, image_position, frameon=False, pad=0)
+
+
+#####avec tentative de fonction pour que la voiture bouge
+
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import numpy as np
+import trajectoire
+
+ax = plt.gca()
+fig = plt.figure()
+
+# Charger une image de voiture
+chemin_image_voiture = "C:\\Users\\cleme\\Documents\\projet prog\\voiture.png"
+image_voiture = plt.imread(chemin_image_voiture) #pour lire une image à partir d'un fichier et la charger en tant qu'objet NumPy array
+
+# Définir la position initiale de la voiture
+position_initiale = [trajectoire.P[:,0][0], trajectoire.P[:,1][0]]
+
+# Afficher l'image sur le graphique
+image_offset = OffsetImage(image_voiture, zoom=0.1)
+#OffsetImage pour représenter une image dans un graphique
+
+ab = AnnotationBbox(image_offset, position_initiale)
+#pour créer une boîte d'annotation contenant un objet (ici OffsetImage)
+
+# Fonction pour mettre à jour la position de la voiture à chaque étape de l'animation
+def changmt_position(i):
+    nouvelle_position = [trajectoire.P[:,0][i], trajectoire.P[:,1][i]]
+    ab.xybox = nouvelle_position
+    ab.xy = nouvelle_position
+    return ab
+
+# # Créer l'animation
+# animation = FuncAnimation(fig, update, frames=len(x), interval=100, blit=True)
+
+# dans ab : frameon=False, pad=0
