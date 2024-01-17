@@ -25,7 +25,9 @@ plt.plot(circuit.liste_droite_triee[0], circuit.liste_droite_triee[1])
 #tracé trajectoire
 plt.plot(trajectoire.P[:,0], trajectoire.P[:,1], color='b')
 
-#affichage voiture
 voiture.ax.add_artist(voiture.ab)
+
+# Créer l'animation
+animation = FuncAnimation(voiture.fig, voiture.changmt_position, frames=len(voiture.trajectoire.P[:,0]), interval=100, blit=True)
 
 plt.show()
