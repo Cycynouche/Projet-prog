@@ -1,0 +1,15 @@
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import matplotlib.pyplot as plt
+
+ax = plt.gca()
+
+# Charger une image de voiture
+car_image_path = r"C:\Users\cleme\Downloads\car1.png"
+car_image = plt.imread(car_image_path)
+
+# Définir la position de l'image sur le graphique
+image_position = [-1.5, -1.8]
+
+# Afficher l'image sur le graphique
+imagebox = OffsetImage(car_image, zoom=0.1)
+ab = AnnotationBbox(imagebox, image_position, frameon=False, pad=0)
