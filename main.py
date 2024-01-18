@@ -71,5 +71,16 @@ def main(N, rayon_circuit, x0, xf, f, f_prime):
     affichage.circuit(pos)
     affichage.bordure(liste_gauche_triee,liste_droite_triee)
     
+
+
+
+####ARGPARSE#####
 if __name__=="__main__":
+    parser=argparse.ArgumentParser()
+    parser.add_argument('traj', type=str, choices=["sinus", "chicane"], help='Nom de la trajectoire définissant la course')
+    parser.add_argument('-N', '--checkpoints', type=int, help='Nombre de checkpoint')
+    parser.add_argument('-td', 'tdepart', help='point de départ du circuit')
+    parser.add_argument('-tf', '--tfinal', help='point arrivée du circuit')
+    parser.add_argument('-r', '--rayon', help='largeur du circuit')
+    parser.add_argument('-scp', '--show.checkpoints', action ='store_true', default = False)
     main()
