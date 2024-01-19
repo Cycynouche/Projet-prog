@@ -36,8 +36,10 @@ def main(N, rayon_circuit, x0, xf, f, scp, scpline, sv):
 
     else:
         raise argparse.ArgumentError(f"Fonction inconnue: {f}")
-        
-    #bordure
+
+    
+    ###BORDURE###
+    
     params = np.linspace(x0,xf, 1000)
     pos = f(params)
     speed = f_prime(params)
@@ -54,6 +56,7 @@ def main(N, rayon_circuit, x0, xf, f, scp, scpline, sv):
     
     liste_gauche_triee = circuit.points_gardes(pos, liste_points_gauche, rayon_circuit)
     liste_droite_triee = circuit.points_gardes(pos, liste_points_droite, rayon_circuit)
+
     
     ###CHECKPOINT####
     
@@ -90,9 +93,6 @@ def main(N, rayon_circuit, x0, xf, f, scp, scpline, sv):
     
     results= scipy.optimize.least_squares(trajectoire.calcul_f, np.repeat(1/2,len(G)), bounds=(0,1), args=(D, G))
     t=results.x
-    
-    #renvoie un result: object contenant t + valeur atteinte en t et autre parties de l'optimisation
-    #point de depart t=1/2, attention t entre 0 et 1 (argument bounds)
     
     P= D+np.reshape(t,(len(t),1))*(G-D)
     
