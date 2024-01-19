@@ -19,6 +19,7 @@ def affichage(pos, lt, ckp, pv, P, scp, scpline, sv):
     
         #checkpoints à droite
         ax.scatter(pv[1][0], pv[1][1])
+        
         #checkpoints à gauche
         ax.scatter(pv[0][0], pv[0][1], color='orange')
 
