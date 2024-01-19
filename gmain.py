@@ -7,7 +7,7 @@ import scipy.optimize
 import argparse
 
 
-def main(N, rayon_circuit, x0, xf, f, scp, scpline):
+def main(N, rayon_circuit, x0, xf, f, scp, scpline, sv):
     
     if f=='sinus':
         
@@ -100,7 +100,7 @@ def main(N, rayon_circuit, x0, xf, f, scp, scpline):
     pv=(points_droite_valides, points_gauche_valides)
     ckp=(x,y)
     
-    affichage.affichage(pos, lt, ckp, pv, P, scp, scpline)
+    affichage.affichage(pos, lt, ckp, pv, P, scp, scpline, sv)
 
 
 
@@ -113,5 +113,6 @@ if __name__=="__main__":
     parser.add_argument('-r', '--rayon', type=float, help='largeur du circuit')
     parser.add_argument('-scp', '--show_checkpoints', action='store_true', default = False)
     parser.add_argument('-scpline', '--show_checkpoints_trace', action='store_true', default = False)
+    parser.add_argument('-sv', '--show_voiture', action='store_true', default = False)
     args= parser.parse_args()
-    main(args.checkpoints, args.rayon, args.xdepart, args.xfinal, args.traj, args.show_checkpoints, args.show_checkpoints_trace)
+    main(args.checkpoints, args.rayon, args.xdepart, args.xfinal, args.traj, args.show_checkpoints, args.show_checkpoints_trace, args.show_voiture)
