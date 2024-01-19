@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt  
+
+
+def affichage(pos, lt, ckp, pv, P, scp=False, scpline=False):
+    plt.plot(pos[0], pos[1], 'b--')
+    plt.gca().set_aspect('equal')
+
+    plt.plot(lt[0][0], lt[0][1], color='orange')
+    plt.plot(lt[1][0], lt[1][1], color='orange')
+
+    if scp:
+        #checkpoints au centre
+        plt.scatter(ckp[0], ckp[1])
+    
+        #checkpoints à droite
+        plt.scatter(pv[1][0], pv[1][1])
+        #checkpoints à gauche
+        plt.scatter(pv[0][0], pv[0][1], color='orange')
+
+    if scpline:
+        #tracé checkpoints
+        plt.plot((pv[0][0],pv[1][0]),(pv[0][1],pv[1][1]))
+
+
+    #tracé trajectoire
+    plt.plot(P[:,0], P[:,1], color='b')
+
+    plt.show()
