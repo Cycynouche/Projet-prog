@@ -1,6 +1,5 @@
 import numpy as np
 
-
 #Détection des points trop proches du circuit
 def distance_min(pos, point):
     return np.min(np.linalg.norm(pos.T-point, axis=1))    
