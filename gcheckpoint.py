@@ -4,7 +4,6 @@ import scipy.integrate as integrate
 import numpy as np
 
 
-
 def distance(t0, t1, f_prime):
    return integrate.quad(lambda t: np.linalg.norm(f_prime(t)), t0, t1)[0]
      
@@ -25,7 +24,7 @@ def calcul_checkpoints(f_prime, td, ta, n):
 
 
 #garder que les points sur la courbes et placer checkpoints sur points valides
-def points_gardes_ckpt(L, liste_points, rayon_circuit):
+def points_gardes_ckpt(L, liste_points, rayon_circuit) :
     liste = []
     eps=0.01
     for i in range(len(L[0])):
