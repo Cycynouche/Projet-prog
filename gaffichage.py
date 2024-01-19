@@ -1,3 +1,9 @@
+import matplotlib.pyplot as plt
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+from matplotlib.animation import FuncAnimation
+from matplotlib.transforms import Affine2D # à utiliser pour faire tourner la voiture
+import numpy as np
+
 
 def affichage(pos, lt, ckp, pv, P, scp, scpline, sv):
     fig, ax = plt.subplots()
